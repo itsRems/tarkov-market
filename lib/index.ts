@@ -72,6 +72,31 @@ export default class TarkovMarket {
     }
   }
 
+  /**
+   * Uses tarkov-market's search system to query items
+   * @param query the search query (a string)
+   * @returns an array of items that match your query
+   */
+  public async search (query: string): Promise<TarkovMarketItem[]> {
+    try {
+      const ck = `${this.cachePrefix}-search-q-${query}`;
+      if (this.cache) {
+        const cached = await this.cache.get(ck);
+        if (cached) return cached;
+      }
+      const items = await this.request('item', { q: query });
+      const final: any[] = [];
+      for (const item of items) {
+        final.push(this.cleanItem(item));
+      }
+      if (this.cache) await this.cache.set(ck, final, this.cacheTtl);
+      return final;
+    } catch (error) {
+      console.log(`[Tarkov Market] ERROR SEARCHING ITEMS (q: ${query})`, error);
+      return [];
+    }
+  }
+
   private async useBestMirror () {
     let best: {
       url: string;
@@ -82,10 +107,10 @@ export default class TarkovMarket {
       const res = await fetch(`${url}/items/all?x-api-key=${this.apiKey}`);
       if (res.status === 200) {
         const time = Date.now() - start;
-        if (best.time > time) best = { url, time };
+        if ((best?.time || 50000) > time) best = { url, time };
       }
     }
-    this.apiUrl = best.url;
+    if (best) this.apiUrl = best.url;
   }
 
   private async request (endpoint: string, query?: {}): Promise<any> {

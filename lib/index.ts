@@ -13,6 +13,11 @@ export default class TarkovMarket {
   private cache?: cacheConfig;
   public cachePrefix: string = 'TM-C';
   public cacheTtl: number = 5 * 60 * 1000;
+  
+  /**
+   * Initialize a new TarkovMarket class
+   * @param config either your api key or a config object
+   */
   constructor (config: TarkovMarketConfig) {
     if (typeof config === "string") this.apiKey = config;
     else {
@@ -22,21 +27,31 @@ export default class TarkovMarket {
         this.cachePrefix = config.cache?.prefix || 'TM-C';
       }
     }
-    this.bestMirror();
+    this.useBestMirror();
   }
 
+  /**
+   * Used to retrieve a single item
+   * @param id the item's id
+   * @returns the clean item body
+   */
   public async getItem (id: string): Promise<TarkovMarketItem> {
     const ck = `${this.cachePrefix}-cache-item-${id}`;
     if (this.cache) {
       const cached = await this.cache.get(ck);
       if (cached) return cached;
     }
-    const item = await this.request('item', { uid: id });
-    const final = this.cleanItem(item[0]);
+    const res = await this.request('item', { uid: id });
+    if (res.length < 1) return undefined;
+    const final = this.cleanItem(res[0]);
     if (this.cache) await this.cache.set(ck, final, this.cacheTtl);
     return final;
   }
 
+  /**
+   * Gets the entire item list from the api
+   * @returns all the current in-game items
+   */
   public async getAll (): Promise<TarkovMarketItem[]> {
     try {
       const ck = `${this.cachePrefix}-all-items-cache`;
@@ -57,12 +72,20 @@ export default class TarkovMarket {
     }
   }
 
-  private async bestMirror () {
-    const results = {};
+  private async useBestMirror () {
+    let best: {
+      url: string;
+      time: number;
+    };
     for (const url of apiMirrors) {
       const start = Date.now();
-      results[url] = Date.now() - start;
+      const res = await fetch(`${url}/items/all?x-api-key=${this.apiKey}`);
+      if (res.status === 200) {
+        const time = Date.now() - start;
+        if (best.time > time) best = { url, time };
+      }
     }
+    this.apiUrl = best.url;
   }
 
   private async request (endpoint: string, query?: {}): Promise<any> {

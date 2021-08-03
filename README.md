@@ -1,6 +1,6 @@
 <h1 align="center">Tarkov Market</h1>
 
-<p align="center">Unofficial NodeJS client for the tarkov-market.com</p>
+<p align="center">Unofficial NodeJS client for the tarkov-market.com api</p>
 
 <hr/>
 

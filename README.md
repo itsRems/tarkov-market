@@ -29,6 +29,9 @@ async function demo () {
   // Get a single item
   const item = await client.getItem("f0fa8457-6638-4ad2-b7e8-4708033d8f39");
   console.log(`Look, it's a ${item.name} !`); // Output: Look, it's a Secure Flash drive !
+  // Search for items
+  const searchResults = await client.search("secure flash");
+  console.log(`Search results: `, searchResults);
 }
 
 demo();

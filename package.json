@@ -1,6 +1,6 @@
 {
   "name": "tarkov-market",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:itsRems/tarkov-market",
@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "prepublish": "yarn build"
   },
   "devDependencies": {
     "@types/node": "^14.10.3",

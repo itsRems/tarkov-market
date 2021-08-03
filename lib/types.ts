@@ -15,6 +15,7 @@ export interface TarkovMarketItem {
   readonly icon: string;
   readonly diff24: number;
   readonly diff7d: number;
+  readonly tags: string[];
 }
 
 export interface RawTarkovMarketItemBody {
@@ -43,5 +44,7 @@ export interface RawTarkovMarketItemBody {
 
 export interface cacheConfig {
   get: (key: string) => Promise<any>;
-  set: (key: string, value: any) => Promise<void>;
+  set: (key: string, value: any, ttl: number) => Promise<void>;
+  ttl?: number;
+  prefix?: string;
 }

@@ -16,7 +16,7 @@
   <li>🤖 Built-in mirror selection</li>
 </ul>
 
-<h3> Code Demo </h3>
+<h3>Code Demo</h3>
 
 ```typescript
 import TarkovMarket from 'tarkov-market';
@@ -44,6 +44,9 @@ demo();
 $ yarn add tarkov-market
 ```
 or `npm install tarkov-market`
+
+Make sure to [grab an api key !](https://www.patreon.com/join/tarkov_market/checkout?rid=4467043)
+
 <h3>Contributing</h3>
 Keep your code readable. For big features, open an issue in advance.
 

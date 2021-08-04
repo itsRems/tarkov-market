@@ -150,7 +150,7 @@ class TarkovMarket {
     }
     cleanItem(item) {
         if (!(item === null || item === void 0 ? void 0 : item.uid))
-            return item;
+            return undefined;
         const sendBack = {
             id: item.uid,
             icon: item.icon || item.img || item.imgBig,
@@ -165,7 +165,9 @@ class TarkovMarket {
             trader: item.traderName,
             diff24: item.diff24h,
             diff7d: item.diff7days,
-            tags: item.tags
+            tags: item.tags,
+            last_updated: item.updated,
+            trader_currency: item.traderPriceCur
         };
         Object.keys(sendBack).forEach(key => sendBack[key] === undefined && delete sendBack[key]);
         return sendBack;

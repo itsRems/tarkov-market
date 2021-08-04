@@ -150,3 +150,5 @@ export default class TarkovMarket {
     return sendBack;
   }
 }
+
+export type { TarkovMarketItem, RawTarkovMarketItemBody } from './types';

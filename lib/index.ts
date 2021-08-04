@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { TarkovMarketConfig } from './config';
-import { cacheConfig, TarkovMarketItem } from './types';
+import { cacheConfig, RawTarkovMarketItemBody, TarkovMarketItem } from './types';
 
 const apiMirrors: string[] = [
   "https://tarkov-market.com/api/v1",
@@ -126,9 +126,9 @@ export default class TarkovMarket {
     return data;
   }
 
-  private cleanItem (item: any) {
-    if (!item?.uid) return item;
-    const sendBack = {
+  private cleanItem (item: RawTarkovMarketItemBody) {
+    if (!item?.uid) return undefined;
+    const sendBack: TarkovMarketItem = {
       id: item.uid,
       icon: item.icon || item.img || item.imgBig,
       price: item.basePrice,
@@ -142,7 +142,9 @@ export default class TarkovMarket {
       trader: item.traderName,
       diff24: item.diff24h,
       diff7d: item.diff7days,
-      tags: item.tags
+      tags: item.tags,
+      last_updated: item.updated,
+      trader_currency: item.traderPriceCur
     };
     Object.keys(sendBack).forEach(key => sendBack[key] === undefined && delete sendBack[key]);
     return sendBack;

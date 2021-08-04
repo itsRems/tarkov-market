@@ -12,10 +12,12 @@ export interface TarkovMarketItem {
   readonly short_name: string;
   readonly slots: number;
   readonly trader: TraderType;
+  readonly trader_currency: CurrencyType;
   readonly icon: string;
   readonly diff24: number;
   readonly diff7d: number;
   readonly tags: string[];
+  readonly last_updated: string;
 }
 
 export interface RawTarkovMarketItemBody {
@@ -40,6 +42,7 @@ export interface RawTarkovMarketItemBody {
   img: string;
   imgBig: string;
   reference: string;
+  tags: string[];
 }
 
 export interface cacheConfig {

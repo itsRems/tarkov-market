@@ -32,3 +32,4 @@ export default class TarkovMarket {
     private request;
     private cleanItem;
 }
+export type { TarkovMarketItem, RawTarkovMarketItemBody } from './types';

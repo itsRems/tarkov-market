@@ -153,8 +153,9 @@ class TarkovMarket {
             return undefined;
         const sendBack = {
             id: item.uid,
+            bsgId: item.bsgId,
             icon: item.icon || item.img || item.imgBig,
-            price: item.basePrice,
+            price: item.price,
             base_price: item.basePrice,
             avg_price_d: item.avg24hPrice,
             avg_price_w: item.avg7daysPrice,

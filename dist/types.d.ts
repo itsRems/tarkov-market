@@ -2,6 +2,7 @@ export declare type TraderType = 'prapor' | 'therapist' | 'fence' | 'skier' | 'p
 export declare type CurrencyType = '₽' | '€' | '$';
 export interface TarkovMarketItem {
     readonly id: string;
+    readonly bsgId: string;
     readonly price: number;
     readonly base_price: number;
     readonly avg_price_d: number;

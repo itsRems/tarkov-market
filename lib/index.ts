@@ -126,10 +126,11 @@ export default class TarkovMarket {
     return data;
   }
 
-  private cleanItem (item: RawTarkovMarketItemBody) {
+  private cleanItem (item: RawTarkovMarketItemBody): TarkovMarketItem {
     if (!item?.uid) return undefined;
     const sendBack: TarkovMarketItem = {
       id: item.uid,
+      bsgId: item.bsgId,
       icon: item.icon || item.img || item.imgBig,
       price: item.price,
       base_price: item.basePrice,

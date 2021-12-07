@@ -163,7 +163,7 @@ class TarkovMarket {
             name: item.name,
             short_name: item.shortName,
             slots: item.slots,
-            trader: item.traderName,
+            trader: item.traderName.toLowerCase(),
             diff24: item.diff24h,
             diff7d: item.diff7days,
             tags: item.tags,

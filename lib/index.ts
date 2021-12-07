@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { TarkovMarketConfig } from './config';
-import { cacheConfig, RawTarkovMarketItemBody, TarkovMarketItem } from './types';
+import { cacheConfig, RawTarkovMarketItemBody, TarkovMarketItem, TraderType } from './types';
 
 const apiMirrors: string[] = [
   "https://tarkov-market.com/api/v1",
@@ -140,7 +140,7 @@ export default class TarkovMarket {
       name: item.name,
       short_name: item.shortName,
       slots: item.slots,
-      trader: item.traderName,
+      trader: item.traderName.toLowerCase() as TraderType,
       diff24: item.diff24h,
       diff7d: item.diff7days,
       tags: item.tags,

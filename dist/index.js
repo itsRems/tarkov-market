@@ -24,7 +24,7 @@ class TarkovMarket {
      */
     constructor(config) {
         var _a;
-        this.apiUrl = 'https://ru.tarkov-market.com/api/v1';
+        this.apiUrl = 'https://tarkov-market.com/api/v1';
         this.cachePrefix = 'TM-C';
         this.cacheTtl = 5 * 60 * 1000;
         if (typeof config === "string")

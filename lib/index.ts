@@ -8,7 +8,7 @@ const apiMirrors: string[] = [
 ];
 
 export default class TarkovMarket {
-  private apiUrl: string = 'https://ru.tarkov-market.com/api/v1';
+  private apiUrl: string = 'https://tarkov-market.com/api/v1';
   private apiKey: string;
   private cache?: cacheConfig;
   public cachePrefix: string = 'TM-C';

@@ -121,7 +121,7 @@ export default class TarkovMarket {
       }
     }
     const res = await fetch(`${this.apiUrl}/${endpoint}?x-api-key=${this.apiKey}${q}`);
-    if (res.status !== 200) return undefined;
+    if (res.status.toString().startsWith('20')) throw new Error(`Unable to fetch ${endpoint}`);
     const data: any = await res.json();
     return data;
   }

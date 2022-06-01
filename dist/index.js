@@ -142,7 +142,7 @@ class TarkovMarket {
                 }
             }
             const res = yield node_fetch_1.default(`${this.apiUrl}/${endpoint}?x-api-key=${this.apiKey}${q}`);
-            if (res.status.toString().startsWith('20'))
+            if (!res.status.toString().startsWith('20'))
                 throw new Error(`Unable to fetch ${endpoint} | ${JSON.stringify({ status: res.status, statusText: res.statusText })}`);
             const data = yield res.json();
             return data;
